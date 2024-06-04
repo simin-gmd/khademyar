@@ -98,9 +98,9 @@
       >
         ثبت
       </v-btn>
-      <v-btn @click="clear">
+      <!-- <v-btn @click="clear">
         حذف
-      </v-btn>
+      </v-btn> -->
     </div>
       </form>
     </div>

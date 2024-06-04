@@ -1,7 +1,8 @@
 <template>
   <PublicPageTitle title="نمایش پروفایل" />
-  <!-- v-if="selectedItem" -->
-  <!-- v-if="userInfo" -->
+  <PublicPageInfo text="در این صفحه شما صرفا اطلاعات پروفایل خود را فقط میتوانید ببینید." />
+
+
   <CardSection >
     <div class="gap-5 justify-between md:justify-start p-5">
       <FormKit
@@ -11,7 +12,7 @@
         :incomplete-message="false"
         :actions="false"
       >
-        <v-container class="!border !border-gray-100 !rounded-xl">
+        <v-container v-if="userInfo" class="!border !border-gray-100 !rounded-xl">
           <v-row class="items-center justify-center">
             <v-col cols="12" class="py-4 justify-center flex">
               <label
@@ -32,11 +33,11 @@
                     size="80"
                   >
                     <span class="text-h5">
-                      <!-- {{
+                      {{
                         userInfo.first_name.substring(0, 1) +
                         " " +
                         userInfo.last_name.substring(0, 1)
-                      }} -->
+                      }}
                     </span>
                   </v-avatar>
                   <!-- <v-avatar v-else class="!shadow-xl" color="blue" size="80">
@@ -50,8 +51,8 @@
               </label>
             </v-col>
             <v-col cols="12" md="6">
-              <!-- v-model:model-value="userInfo.first_name" -->
               <FormKit
+              v-model:model-value="userInfo.first_name"
                 disabled
                 placeholder=""
                 name="firstname"
@@ -64,8 +65,8 @@
               />
             </v-col>
             <v-col cols="12" md="6">
-              <!-- v-model:model-value="userInfo.last_name" -->
               <FormKit
+              v-model:model-value="userInfo.last_name"
                 disabled
                 placeholder=""
                 name="lastname"
@@ -78,8 +79,8 @@
               />
             </v-col>
             <v-col cols="12" md="6">
-              <!-- v-model:model-value="userInfo.email" -->
               <FormKit
+              v-model:model-value="userInfo.email"
                 disabled
                 placeholder=""
                 name="email"
@@ -95,8 +96,8 @@
               />
             </v-col>
             <v-col cols="12" md="6">
-              <!-- v-model:model-value="userInfo.username" -->
               <FormKit
+              v-model:model-value="userInfo.username"
                 disabled
                 id="mobile"
                 name="mobile"
@@ -187,9 +188,10 @@ import { reactive } from 'vue'
 import axios from "axios";
 const { $swal } = useNuxtApp();
 const editImage = ref(null);
-// const userInfo = ref(null);
-// const setUserData = useAsyncData("userData", () => $fetch("/api/auth/info"));
-// watch(setUserData.data, () => {
-//   userInfo.value = setUserData.data.value.data;
-// });
+const userInfo = ref(null);
+const setUserData = useAsyncData("userData", () => $fetch("/api/auth/info"));
+watch(setUserData.data, () => {
+  userInfo.value = setUserData.data.value.data;
+  console.log(userInfo.value  ,"ihbgufhdjwskomknbfgvhuji");
+});
 </script>

@@ -1,5 +1,6 @@
 <template>
   <PublicPageTitle title="لیست شیفت های موجود" />
+  <PublicPageInfo text="لیست شیفت های موجود" />
 
   <CardSection>
     <formsDataTable :search="studentSearch" @change="handleSearchItems">
