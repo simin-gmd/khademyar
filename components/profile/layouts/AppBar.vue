@@ -2,10 +2,7 @@
   <v-app-bar :elevation="0" class="border border-gray-100 main-appbar">
     <template v-slot:prepend>
       <div class="md:hidden flex items-center">
-        <v-app-bar-nav-icon
-          variant="text"
-          @click.stop="drawer = !drawer"
-        ></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>سامانه خادمیاران</v-toolbar-title>
       </div>
     </template>
@@ -24,9 +21,12 @@
             <v-btn icon v-bind="props">
               <div class="menu-item">
                 <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
-                  <v-badge color="error" dot>
+                  <v-badge v-if="notify" color="error" dot >
                     <v-icon>mdi-bell-outline</v-icon>
                   </v-badge>
+                  <div v-else  >
+                    <v-icon>mdi-bell-outline</v-icon>
+                  </div>
                 </v-btn>
               </div>
             </v-btn>
@@ -37,10 +37,15 @@
                 <h3 class="block text-sm text-gray-900 dark:text-white mb-3">
                   اعلان ها
                 </h3>
-                <hr />
-                <div class="text-caption my-3">درخواست آمادگی برای شیفت 7</div>
-                <hr />
-                <div class="text-caption my-3">درخواست آمادگی برای شیفت 1</div>
+                <div v-if="notify" v-for="(notif , i) in notify" key="i">
+                  <hr />
+                  <div class="text-caption my-3">{{ notif.title }}</div>
+                </div>
+                <div v-else>
+                  <span class="text-caption my-3">
+                    اعلانی وجود ندارد
+                  </span>
+                </div>
                 <v-divider class="my-2"></v-divider>
               </div>
             </v-card-text>
@@ -75,20 +80,12 @@
               <v-divider class="my-2"></v-divider>
 
               <hr />
-              <v-btn
-                @click.prevent="handleChange"
-                class="ma-2 w-100 mx-auto text-center"
-                color="primary"
-              >
+              <v-btn @click.prevent="handleChange" class="ma-2 w-100 mx-auto text-center" color="primary">
                 <v-icon class="ml-3" icon="mdi-exit-to-app"></v-icon>
-                انتخاب حساب 
+                انتخاب حساب
               </v-btn>
 
-              <v-btn
-                @click.prevent="handleLogout"
-                class="ma-2 w-100 mx-auto text-center"
-                color="red"
-              >
+              <v-btn @click.prevent="handleLogout" class="ma-2 w-100 mx-auto text-center" color="red">
                 <v-icon class="ml-3" icon="mdi-exit-to-app"></v-icon>
                 خروج
               </v-btn>
@@ -101,13 +98,7 @@
 
   <div class="flex">
     <div class="md:hidden">
-      <v-navigation-drawer
-        v-model="drawer"
-        location="right"
-        class="!overflow-hidden"
-        temporary
-        width="100%"
-      >
+      <v-navigation-drawer v-model="drawer" location="right" class="!overflow-hidden" temporary width="100%">
         <ProfileLayoutsMainSidebar />
       </v-navigation-drawer>
     </div>
@@ -120,7 +111,7 @@
   </div>
 </template>
 <script setup>
-const authStore=useAuthStore()
+const authStore = useAuthStore()
 // logout handler
 async function handleLogout() {
   try {
@@ -131,16 +122,27 @@ async function handleLogout() {
       return false;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
 function handleChange() {
   const selectedRole = useCookie("selectedRole");
   selectedRole.value = "multiple";
-reloadNuxtApp()
+  reloadNuxtApp()
 }
 const drawer = ref(false);
+const notify = ref(null);
+
+onMounted(async () => {
+  const response = await $fetch(`/api/users/notify`);
+  // console.log(response.data.length, "lengh");
+  if (response.status && response.data.length > 0) {
+    console.log(response, "response notify");
+    notify.value = response.data
+  }
+})
+
 </script>
 <style module>
 .v-navigation-drawer__content {

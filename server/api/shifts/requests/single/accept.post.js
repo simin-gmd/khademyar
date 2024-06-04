@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
   const bodyData = await readBody(event);
-  console.log("body", bodyData);
+  // console.log("body", bodyData);
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return { status: false, data: e };
   }
 });

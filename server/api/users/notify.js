@@ -1,11 +1,11 @@
 import axios from "axios";
+import createFilterQuery from "~/server/utils/createFilterQuery";
 
 export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
+  const query = getQuery(event);
 
-  const incomeBody = await readBody(event);
-  // console.log(incomeBody);
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -14,16 +14,19 @@ export default defineEventHandler(async (event) => {
       refresh: authToken,
     });
     if (access.data.access) {
-      const response = await axios.post(`${API_URL}/api/shifts/`,incomeBody, {
-        headers: {
-          Authorization: `Bearer ${access.data.access}`,
-        },
-      });
-      // console.log("test", response.data);
+      const response = await axios.get(
+        `${API_URL}/api/shifts/Notify_new_shifts/`,
+        {
+          headers: {
+            Authorization: `Bearer ${access.data.access}`,
+          },
+        }
+      );
+      console.log("simsime", response.data);
       return { status: true, data: response.data };
     }
   } catch (e) {
-    // console.log(e.response.data);
+    console.log(e , "simin errore");
     return { status: false, data: e };
   }
 });

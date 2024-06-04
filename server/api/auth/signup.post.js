@@ -17,10 +17,10 @@ export default defineEventHandler(async (event) => {
       body: incomeBody,
       
     });
-    console.log(response.data);
+    // console.log(response.data);
     return { status: true, data: response.data };
   } catch (err) {
-    console.log(err);
+    // console.log(err);
 
     return { status: false, data: err };
   }

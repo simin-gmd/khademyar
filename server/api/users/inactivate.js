@@ -1,6 +1,6 @@
 // /api/members/users/{username}/activate/
 import axios from "axios";
-import createFilterQuery from "~/server/utils/createFilterQuery";
+// import createFilterQuery from "~/server/utils/createFilterQuery";
 
 export default defineEventHandler(async (event) => {
   //read payload form body
@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
       refresh: authToken,
     });
     if (access.data.access) {
-      const response = await axios.patch(
-        `${API_URL}/api/members/users/${query.username}/activate/`,
+      const response = await axios.post(
+        `${API_URL}/api/members/users/${query.username}/inactivate/`,
         query,
         {
           headers: {
@@ -23,9 +23,11 @@ export default defineEventHandler(async (event) => {
           },
         }
       );
+      // console.log(response.data , "simsim");
       return { status: true, data: response.data };
     }
   } catch (e) {
+    // console.log(e.data , "simsim error");
     return { status: false, data: e };
   }
 });

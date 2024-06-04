@@ -192,6 +192,6 @@ const userInfo = ref(null);
 const setUserData = useAsyncData("userData", () => $fetch("/api/auth/info"));
 watch(setUserData.data, () => {
   userInfo.value = setUserData.data.value.data;
-  console.log(userInfo.value  ,"ihbgufhdjwskomknbfgvhuji");
+  // console.log(userInfo.value  ,"ihbgufhdjwskomknbfgvhuji");
 });
 </script>

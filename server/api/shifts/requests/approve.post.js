@@ -28,11 +28,11 @@ export default defineEventHandler(async (event) => {
           },
         }
       );
-      console.log("test", response.data);
+      // console.log("test", response.data);
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log(e.response);
+    // console.log(e.response);
     return { status: false, data: e };
   }
 });

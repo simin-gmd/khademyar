@@ -16,11 +16,11 @@ const authToken=getCookie(event,'accessToken')
           },
         }
       );
-      console.log("test", response.data);
+      // console.log("test", response.data);
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return { status: false, data: e };
   }
   

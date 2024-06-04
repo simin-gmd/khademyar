@@ -72,9 +72,9 @@
 </template>
 <script setup lang="js">
 const drag = ref(false);
-function log(e) {
-  console.log(e);
-}
+// function log(e) {
+//   console.log(e);
+// }
 const list1 = ref([
   { className: "اول",courseName: "قرآن", id: 1 },
   { className: "دوم",courseName: "فارسی", id: 2 },

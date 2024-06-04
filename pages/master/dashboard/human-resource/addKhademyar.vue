@@ -117,7 +117,7 @@ async function register(formData) {
     }
   } catch (error) {
     $swal.fire("خطا در دریافت اطلاعات!", "", "error");
-    console.log(error);
+    // console.log(error);
   } finally {
     loading.value = false;
   }

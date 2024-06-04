@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       `${config.public.API_URL}/api/auth/jwt/create/`,
       incomeForm
     );
-    console.log(response.data.refresh, "refreshToken");
+    // console.log(response.data.refresh, "refreshToken");
     if (response.data.refresh) {
       setCookie(event, "refreshToken", response.data.refresh, {
         httpOnly: true,
@@ -32,7 +32,6 @@ export default defineEventHandler(async (event) => {
     }
     return { status: true, data: response.data };
   } catch (err) {
-    console.log(err ,"errorsimin");
 
     return { status: false, data: err };
   }

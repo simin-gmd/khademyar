@@ -134,7 +134,7 @@ async function handleLogout() {
       return false;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 const drawer = ref(false);

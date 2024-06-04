@@ -97,20 +97,20 @@ const loading = ref(false);
 const errorMsg = ref('')
 
 async function login(formData) {
-  console.log(formData , "fffffff");
+  // console.log(formData , "fffffff");
   try {
     loading.value = true; 
     const data = await axios.postForm("/api/auth/login", 
     formData 
     );
-    console.log(data.data);
+    // console.log(data.data);
     if (data.data.status) {
       reloadNuxtApp();
     } else {
       errorMsg.value = " نام کاربری یا رمز عبور نا معتبر است";
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   } finally {
     loading.value = false;
   }
