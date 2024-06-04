@@ -5,7 +5,7 @@
   <CardSection>
     <formsDataTable :search="studentSearch" @change="handleSearchItems">
       <template #table>
-        <v-data-table :search="studentSearch" :items="items" :headers="headers">
+        <v-data-table no-data-text="لطفا کمی صبر کنید..." :search="studentSearch" :items="items" :headers="headers">
           <!-- data tabel headers -->
           <template v-slot:item.options="{ item }">
             <div class="flex justify-center gap-x-3 text-center">
@@ -222,18 +222,6 @@ const createRows = (item) => {
 };
 
 const items = ref([
-  {
-    name: "sads",
-    date: "sad",
-    people: {
-      man: "12",
-      woman: "14",
-    },
-    number: {
-      man: "12",
-      woman: "14",
-    },
-  },
 ]);
 
 let desserts = [

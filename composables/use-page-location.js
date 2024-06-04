@@ -47,6 +47,12 @@ export default function (accecibilities = "master") {
             icon: "mdi-account-group-outline",
             activeRute: "khademyar",
           },
+          {
+            title: "افزودن خادمیار",
+            link: "/master/dashboard/human-resource/addKhademyar",
+            icon: "mdi-account-group-outline",
+            activeRute: "addKhademyar",
+          },
         ],
       },
       // {

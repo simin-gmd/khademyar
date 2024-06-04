@@ -1,5 +1,7 @@
 <template>
   <PublicPageTitle title="شیفت ها" />
+  <PublicPageInfo text="اینجا شما میتوانید شیفت ایجاد کنید" />
+
   <CardSection>
     <v-card>
       <v-card-title>

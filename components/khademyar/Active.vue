@@ -86,7 +86,7 @@
                       size="small"
                       @click="handleDelete(item)"
                       color="red"
-                      :text="'غیر فعال'"
+                      :text="'حذف'"
                     >
                     </v-btn>
                     <v-btn
@@ -535,7 +535,7 @@ const acceptShift = (item) => {
 
 const handleDelete = (item) => {
   Swal.fire({
-    title: "از غیرفعال کردن کاربر مورد نظر اطمینان دارید؟",
+    title: "از حذف کاربر مورد نظر اطمینان دارید؟",
     showCancelButton: true,
     confirmButtonText: "بله",
     cancelButtonText: "خیر",
@@ -546,7 +546,7 @@ const handleDelete = (item) => {
         const data = await getInitialData();
         dataListState.value = data.data.results;
         trigger.value = !trigger.value;
-        Swal.fire("کاربر مورد نظر غیر فعال شد.", "", "success");
+        Swal.fire("کاربر مورد نظر حذف شد.", "", "success");
       } else {
         Swal.fire("مشکلی پیش آمده است.", "", "error");
       }
