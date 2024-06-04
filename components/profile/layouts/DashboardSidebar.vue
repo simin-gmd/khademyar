@@ -22,13 +22,13 @@
           </div>
           <div class="flex flex-col pb-5">
             <div class="flex justify-center gap-x-2">
-              <!-- <div class="menu-item">
+              <div class="menu-item">
                 <nuxt-link :to="`/${selectedRole}/dashboard/keramat/settings`">
                   <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
                     <v-icon>mdi-cog-outline</v-icon>
                   </v-btn>
                 </nuxt-link>
-              </div> -->
+              </div>
 
               <!-- <div class="menu-item">
                 <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
