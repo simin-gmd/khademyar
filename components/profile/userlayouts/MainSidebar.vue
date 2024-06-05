@@ -27,34 +27,7 @@
               </div>
             </div>
 
-            <div class="flex flex-col">
-              <div class="menu-item">
-                <nuxt-link :to="`/${selectedRole}/dashboard/keramat/settings`">
-                  <v-btn
-                    :ripple="false"
-                    class="menu-icon !rounded-xl"
-                    flat
-                    icon
-                  >
-                    <v-icon>mdi-cog-outline</v-icon>
-                  </v-btn>
-                </nuxt-link>
-              </div>
-              <v-spacer class="w-5"></v-spacer>
-
-              <div class="menu-item">
-                <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
-                  <v-icon>mdi-bell-outline</v-icon>
-                </v-btn>
-              </div>
-              <v-spacer class="w-5"></v-spacer>
-
-              <div class="menu-item">
-                <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
-                  <v-icon>mdi-headset</v-icon>
-                </v-btn>
-              </div>
-            </div>
+            
           </div>
         </v-card>
       </v-navigation-drawer>

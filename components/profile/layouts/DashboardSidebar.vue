@@ -30,7 +30,7 @@
                 </nuxt-link>
               </div>
 
-              <div class="menu-item">
+              <!-- <div class="menu-item">
                 <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
                   <v-icon>mdi-bell-outline</v-icon>
                 </v-btn>
@@ -40,7 +40,7 @@
                 <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
                   <v-icon>mdi-headset</v-icon>
                 </v-btn>
-              </div>
+              </div> -->
             </div>
             <div>
               <img src="/rezaLogo.png" class="w-16 h-16 object-center mx-auto" />

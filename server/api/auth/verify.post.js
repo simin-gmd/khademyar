@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const incomeForm = await readFormData(event);
 
   const config = useRuntimeConfig();
-  console.log(incomeForm);
+  // console.log(incomeForm);
   try {
     const response = await axios.post(
       `${config.public.API_URL}/api/auth/jwt/create`,
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       return { status: true, data: response.data };
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
 
     return { status: false, data: err };
   }

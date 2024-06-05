@@ -24,9 +24,12 @@
             <v-btn icon v-bind="props">
               <div class="menu-item">
                 <v-btn :ripple="false" class="menu-icon !rounded-xl" flat icon>
-                  <v-badge color="error" dot>
+                  <v-badge v-if="notify" color="error" dot >
                     <v-icon>mdi-bell-outline</v-icon>
                   </v-badge>
+                  <div v-else  >
+                    <v-icon>mdi-bell-outline</v-icon>
+                  </div>
                 </v-btn>
               </div>
             </v-btn>
@@ -35,10 +38,15 @@
             <v-card-text>
               <div class="mx-auto text-center">
                 <h3 class="block text-sm text-gray-900 dark:text-white mb-3">اعلان ها</h3>
-                <hr />
-                <div class="text-caption my-3">درخواست آمادگی برای شیفت 7</div>
-                <hr />
-                <div class="text-caption my-3">درخواست آمادگی برای شیفت 1</div>
+                <div v-if="notify" v-for="(notif , i) in notify" key="i">
+                  <hr />
+                  <div class="text-caption my-3">{{ notif.title }}</div>
+                </div>
+                <div v-else>
+                  <span class="text-caption my-3">
+                    اعلانی وجود ندارد
+                  </span>
+                </div>
                 <v-divider class="my-2"></v-divider>
               </div>
             </v-card-text>
@@ -120,7 +128,7 @@ async function handleLogout() {
       return false;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 function handleChange() {
@@ -129,4 +137,15 @@ function handleChange() {
   reloadNuxtApp();
 }
 const drawer = ref(false);
+
+const notify = ref(null);
+
+onMounted(async () => {
+  const response = await $fetch(`/api/users/notify`);
+  // console.log(response.data.length, "lengh");
+  if (response.status && response.data.length > 0) {
+    console.log(response, "response notify");
+    notify.value = response.data
+  }
+})
 </script>

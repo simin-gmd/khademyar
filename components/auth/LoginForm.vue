@@ -103,7 +103,7 @@ async function login(formData) {
       errorMsg.value = " نام کاربری یا رمز عبور نا معتبر است";
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   } finally {
     loading.value = false;
   }

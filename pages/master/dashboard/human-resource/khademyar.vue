@@ -1,5 +1,6 @@
 <template>
   <PublicPageTitle title="خادمیاران" />
+  <PublicPageInfo text="در این صفحه شما میتوانید مامی خادمیاران را با اطلاعات آنها مشاهده نمایید و هم چنین میتوانید آنها را حذف و یا تایید نهایی بزنید..." />
 
   <div class="bg-white rounded-md h-screen p-5">
     <v-sheet class="mx-auto">

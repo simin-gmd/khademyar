@@ -20,7 +20,7 @@
               </nuxt-link>
             </div>
           </div>
-          <div class="flex flex-col pb-5">
+          <!-- <div class="flex flex-col pb-5">
             <div class="flex justify-center gap-x-2">
               <div class="menu-item">
                 <nuxt-link :to="`/${selectedRole}/dashboard/keramat/settings`">
@@ -45,7 +45,7 @@
             <div>
               <img src="/rezaLogo.png" class="w-16 h-16 object-center mx-auto" />
             </div>
-          </div>
+          </div> -->
         </div>
       </v-card>
     </div>
