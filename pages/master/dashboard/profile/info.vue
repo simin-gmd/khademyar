@@ -3,7 +3,10 @@
   <!-- v-if="selectedItem" -->
   <!-- v-if="userInfo" -->
 
+<!-- 
 
+  
+ -->
   <CardSection >
     <div class="gap-5 justify-between md:justify-start p-5">
     
@@ -98,9 +101,7 @@
       >
         ثبت
       </v-btn>
-      <v-btn @click="clear">
-        حذف
-      </v-btn>
+     
     </div>
       </form>
     </div>

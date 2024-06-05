@@ -1,12 +1,13 @@
-// /api/members/users/{username}/activate/
+// /api/shifts-request/{id}/approve_shift/
+
 import axios from "axios";
-import createFilterQuery from "~/server/utils/createFilterQuery";
 
 export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
-  const query = getQuery(event);
-  console.log(query);
+  const bodyData = await readBody(event);
+  const { old_password, password, password_confirm, username } = bodyData;
+  console.log(username);
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -16,17 +17,25 @@ export default defineEventHandler(async (event) => {
     });
     if (access.data.access) {
       const response = await axios.patch(
-        `${API_URL}/api/members/users/${query.username}/activate/`,
-        query,
+        `${API_URL}/api/members/users/${username}/update_password/`,
+        {
+          old_password,
+          password,
+          password_confirm,
+        },
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
           },
         }
       );
+      console.log("test", response.data);
       return { status: true, data: response.data };
     }
   } catch (e) {
-    return { status: false, data: e };
+    return {
+      status: false,
+      data: e.response.data.old_password ? "رمز عبور قبلی مطابقت  ندارد" : "",
+    };
   }
 });

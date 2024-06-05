@@ -11,9 +11,7 @@
                     <nuxt-link to="/">
                       <img src="/rezaLogo.png" class="max-h-16 mx-auto" />
                     </nuxt-link>
-                    <h2
-                      class="text-center !cursor-default font-bold text-green-800"
-                    >
+                    <h2 class="text-center !cursor-default font-bold text-green-800">
                       بسم الله الرحمان الرحیم
                     </h2>
                     <div class="form-holder">
@@ -61,8 +59,7 @@
                           ></v-progress-circular>
                           ورود
                         </button>
-                        <span class=" text-red-500">{{ errorMsg }}</span>
-
+                        <span class="text-red-500">{{ errorMsg }}</span>
                       </FormKit>
                     </div>
                   </div>
@@ -91,19 +88,15 @@
   </div>
 </template>
 <script setup>
-import axios from 'axios';
+import axios from "axios";
 
 const loading = ref(false);
-const errorMsg = ref('')
+const errorMsg = ref("");
 
 async function login(formData) {
-  console.log(formData , "fffffff");
   try {
-    loading.value = true; 
-    const data = await axios.postForm("/api/auth/login", 
-    formData 
-    );
-    console.log(data.data);
+    loading.value = true;
+    const data = await axios.post("/api/auth/login", formData);
     if (data.data.status) {
       reloadNuxtApp();
     } else {

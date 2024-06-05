@@ -9,7 +9,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      API_URL: 'http://django:8000',
+      // API_URL: 'http://django:8000',
+      API_URL: 'http://185.81.97.233:8000',
       LOCAL_URL: 'http://localhost:3000',
     }
   },
