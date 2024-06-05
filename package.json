@@ -12,6 +12,9 @@
   "dependencies": {
     "@alireza-ab/vue-persian-datepicker": "^2.3.2",
     "@formkit/nuxt": "^1.5.9",
+    "@fullcalendar/daygrid": "^6.1.14",
+    "@fullcalendar/interaction": "^6.1.14",
+    "@fullcalendar/vue3": "^6.1.14",
     "@mdi/font": "^7.4.47",
     "@nuxt-alt/proxy": "^2.5.8",
     "@pinia/nuxt": "^0.5.1",

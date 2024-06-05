@@ -90,12 +90,12 @@ export default function (accecibilities = "master") {
         icon: "mdi-message-alert-outline",
         activeRute: "profile",
         child: [
-          {
-            title: "اطلاعات پایه",
-            link: "/master/dashboard/profile/info",
-            icon: "mdi-message-alert-outline",
-            activeRute: "info",
-          },
+          // {
+          //   title: "اطلاعات پایه",
+          //   link: "/master/dashboard/profile/info",
+          //   icon: "mdi-message-alert-outline",
+          //   activeRute: "info",
+          // },
           {
             title: "پروفایل",
             link: "/master/dashboard/profile/masterProfile",
@@ -168,12 +168,12 @@ export default function (accecibilities = "master") {
         icon: "mdi-message-alert-outline",
         activeRute: "profile",
         child: [
-          {
-            title: "اطلاعات پایه",
-            link: "/user/dashboard/profile/info",
-            icon: "mdi-message-alert-outline",
-            activeRute: "info",
-          },
+          // {
+          //   title: "اطلاعات پایه",
+          //   link: "/user/dashboard/profile/info",
+          //   icon: "mdi-message-alert-outline",
+          //   activeRute: "info",
+          // },
           {
             title: "پروفایل",
             link: "/user/dashboard/profile/userProfile",

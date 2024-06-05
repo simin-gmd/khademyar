@@ -1,0 +1,100 @@
+@import "variable";
+.fc {
+  .fc-scrollgrid {
+    table {
+      min-width: 100%;
+    }
+  }
+  .fc-view-harness-active {
+    > .fc-view {
+      overflow: auto;
+    }
+  }
+  .fc-scrollgrid-liquid {
+    min-width: 800px;
+  }
+  .fc-toolbar {
+    flex-wrap: wrap;
+    gap: 15px;
+    .fc-toolbar-chunk {
+      display: flex;
+      .fc-toolbar-title {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .fc-button-primary {
+        background-color: $green_100;
+      }
+
+      .fc-icon {
+        display: flex;
+      }
+    }
+  }
+
+  .fc-day-past {
+    .add-btn {
+      display: none;
+    }
+  }
+  .fc-col-header {
+    height: 50px !important;
+    background-color: $green_100;
+    color: #fff;
+    .fc-col-header-cell {
+      vertical-align: middle;
+      &.fc-day-fri {
+        opacity: 1;
+        background: $green_100;
+      }
+    }
+  }
+
+  .fc-day-today {
+    background-color: #ffd9194f;
+  }
+  .fc-day-fri {
+    background-color: #a61d1d7d;
+  }
+  .fc-daygrid-day-number {
+    display: flex;
+    width: 100%;
+  }
+  .color-event-1 {
+    background-color: #00897b;
+    color: #fff;
+    cursor: pointer;
+  }
+  .color-event-3 {
+    background-color: #ff6839;
+    color: #fff;
+    cursor: pointer;
+  }
+  .color-event-2 {
+    background-color: #6007d8;
+    color: #fff;
+    cursor: pointer;
+  }
+  .color-event-4 {
+    background-color: #3f51b5;
+    color: #fff;
+    cursor: pointer;
+  }
+  .fc-event-time {
+    display: none;
+  }
+}
+
+.bg_blue {
+  background-color: rgba(85, 85, 223, 0.822);
+}
+.bg_slate {
+  background-color: rgba(109, 109, 109, 0.822);
+}
+.bg_green {
+  background-color: rgba(39, 203, 113, 0.822);
+}
+.bg_yellow {
+  background-color: rgba(245, 206, 33, 0.963);
+}

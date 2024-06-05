@@ -2,7 +2,8 @@ import axios from "axios";
 
 export default defineEventHandler(async (event) => {
   //read payload form body
-const authToken=getCookie(event,'refreshToken')
+  const authToken = getCookie(event, "refreshToken");
+  const query = getQuery(event);
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -12,7 +13,7 @@ const authToken=getCookie(event,'refreshToken')
     });
     if (access.data.access) {
       const response = await axios.get(
-        `${API_URL}/api/shifts/`,
+        `${API_URL}/api/shifts/?${createFilterQuery(query)}`,
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
