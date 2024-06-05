@@ -5,7 +5,8 @@ import axios from "axios";
 export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
-  // const query = getQuery(event);
+  const incomeBody = await readBody(event);
+console.log(incomeBody , "incomeBody");
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -14,20 +15,19 @@ export default defineEventHandler(async (event) => {
       refresh: authToken,
     });
     if (access.data.access) {
-      const response = await axios.get(
-        `${API_URL}/api/shifts/dashboard_shifts_info/`,
-        query,
+      const response = await axios.post(
+        `${API_URL}/api/shifts-capacity/`,incomeBody, 
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
           },
         }
       );
-      console.log(response.data , "simsim");
+      // console.log(response.data , "simsim");
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log( "simsim error", e );
+    console.log(e , "simsim error");
     return { status: false, data: e };
   }
 });
