@@ -144,7 +144,7 @@ onMounted(async () => {
   const response = await $fetch(`/api/users/notify`);
   // console.log(response.data.length, "lengh");
   if (response.status && response.data.length > 0) {
-    console.log(response, "response notify");
+   // console.log(response, "response notify");
     notify.value = response.data
   }
 })
