@@ -39,7 +39,7 @@
                 </h3>
                 <div v-if="notify" v-for="(notif , i) in notify" key="i">
                   <hr />
-                  <div class="text-caption my-3">{{ notif.title }}</div>
+                  <div class="text-caption my-3">{{ notif.name }}</div>
                 </div>
                 <div v-else>
                   <span class="text-caption my-3">

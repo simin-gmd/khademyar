@@ -40,7 +40,7 @@
                 <h3 class="block text-sm text-gray-900 dark:text-white mb-3">اعلان ها</h3>
                 <div v-if="notify" v-for="(notif , i) in notify" key="i">
                   <hr />
-                  <div class="text-caption my-3">{{ notif.title }}</div>
+                  <div class="text-caption my-3">{{ notif.name }}</div>
                 </div>
                 <div v-else>
                   <span class="text-caption my-3">

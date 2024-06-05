@@ -38,7 +38,7 @@
               type="password"
               name="password"
               id="password"
-              value="super-secret"
+             
               label=" رمز عبور جدید"
               validation="required"
               :validation-messages="{

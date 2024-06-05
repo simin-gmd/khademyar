@@ -35,7 +35,7 @@
                             <FormKit
                               type="password"
                               name="password"
-                              value=" رمز عبور جدید" 
+                              
                               label=" رمز عبور جدید"
                               validation="required"
                               messages-class="form-text text-red"

@@ -22,7 +22,7 @@
               type="password"
               name="old_password"
               id="password"
-              value="super-secret"
+              
               label="رمز عبور قبلی"
               validation="required"
               :validation-messages="{
@@ -38,7 +38,7 @@
               type="password"
               name="password"
               id="password"
-              value="super-secret"
+              
               label=" رمز عبور جدید"
               validation="required"
               :validation-messages="{
