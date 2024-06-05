@@ -29,7 +29,17 @@ export default defineNuxtConfig({
     { src: "~/plugins/vuetify.js", mode: "client" },
     { src: "~/plugins/sweet-alert2", mode: "client" },
   ],
+  app: {
+    head: {
+      script: [
+        // <script src="https://myawesome-lib.js"></script>
+        {
+          src: "https://cdn.jsdelivr.net/npm/jalali-moment@3.2.3/dist/jalali-moment.browser.js",
+        },
+      ],
+    },
 
+  },
   css: [
     // SCSS file in the project
     "~/assets/styles/scss/main.scss",
