@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default defineEventHandler(async (event) => {
   //read payload form body
-  const incomeForm = await readFormData(event);
-
+  const incomeForm = await readBody(event);
+  console.log(incomeForm);
   const config = useRuntimeConfig();
   try {
     const response = await axios.post(
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
         path: "/",
         sameSite: true,
       });
-    //   console.log(response.data);
+      //   console.log(response.data);
     }
     return { status: true, data: response.data };
   } catch (err) {

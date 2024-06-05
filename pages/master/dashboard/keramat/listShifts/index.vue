@@ -1,129 +1,22 @@
 <template>
   <PublicPageTitle title="لیست شیفت های موجود" />
-  <PublicPageInfo text="لیست شیفت های موجود" />
 
   <CardSection>
     <formsDataTable :search="studentSearch" @change="handleSearchItems">
       <template #table>
-        <v-data-table no-data-text="لطفا کمی صبر کنید..." :search="studentSearch" :items="items" :headers="headers">
+        <v-data-table :search="studentSearch" :items="items" :headers="headers">
           <!-- data tabel headers -->
           <template v-slot:item.options="{ item }">
             <div class="flex justify-center gap-x-3 text-center">
               <div>
-                <v-dialog transition="dialog-bottom-transition" max-width="800">
-                  <template v-slot:activator="{ props: activatorProps }">
-                    <v-btn
-                      v-bind="activatorProps"
-                      class="rounded-lg !text-blue-500"
-                      block
-                      variant="tonal"
-                    >
-                      <v-icon> mdi-eye-plus </v-icon></v-btn
-                    >
-                  </template>
-
-                  <template v-slot:default="{ isActive }">
-                    <v-card>
-                      <v-toolbar :title="item.name"></v-toolbar>
-
-                      <!-- <v-card-text class="p-5">
-                        <v-container-fluid>
-                          <v-card class="mx-auto text-base !bg-slate-100 !py-1 mb-4">
-                            <v-card-text>تاریخ: {{ item.date }} </v-card-text>
-                          </v-card>
-                        </v-container-fluid>
-                      </v-card-text> -->
-                      <v-card-text class="p-5">
-                        <v-container-fluid>
-                          <v-card class="mx-auto text-base !bg-slate-100 !py-1 mb-4">
-                            <v-card-text>لیست اعلام آمادگی</v-card-text>
-                          </v-card>
-                          <v-table height="300px" fixed-header>
-                            <thead>
-                              <tr>
-                                <th class="">نام</th>
-                                <th class="">نام خانوادگی</th>
-                                <th class="">موبایل</th>
-                                <th class="">وضعیت</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr v-for="item in desserts" :key="item.name">
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.Lname }}</td>
-                                <td>{{ item.mobile }}</td>
-                                <td>
-                                  <div
-                                    class="d-flex gap-x-2"
-                                    v-if="!item.stock.isSelected"
-                                  >
-                                    <v-btn
-                                      class="bg-green"
-                                      @click="acceptShift(item.id)"
-                                      :disabled="item.stock.accept"
-                                      >قبول
-                                    </v-btn>
-                                    <v-btn
-                                      class="bg-red"
-                                      @click="rejectShift(item.id)"
-                                      :disabled="item.stock.reject"
-                                      >رد</v-btn
-                                    >
-                                  </div>
-                                  <div class="d-flex gap-x-2" v-else>
-                                    <v-btn
-                                      v-if="item.stock.status == 'reject'"
-                                      class="bg-green"
-                                      @click="acceptShift(item.id)"
-                                      :disabled="item.stock.accept"
-                                      >تغییر وضعیت
-                                    </v-btn>
-                                    <v-chip
-                                      v-if="item.stock.status == 'reject'"
-                                      color="error"
-                                      >رد شده</v-chip
-                                    >
-
-                                    <v-btn
-                                      v-if="item.stock.status == 'accept'"
-                                      class="bg-red"
-                                      @click="rejectShift(item.id)"
-                                      :disabled="item.stock.reject"
-                                      >تغییر وضعیت</v-btn
-                                    >
-                                    <v-chip
-                                      v-if="item.stock.status == 'accept'"
-                                      color="success"
-                                      >قبول شده</v-chip
-                                    >
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </v-table>
-                          <v-col cols="12" class="flex ga-3">
-                            <v-btn
-                              class="mx-auto text-base !bg-teal-800 !text-white !py-1"
-                            >
-                              <v-icon> mdi-download-box </v-icon>
-                              خروجی همه نتایج
-                            </v-btn>
-
-                            <v-btn
-                              class="mx-auto text-base !bg-teal-700 !text-white !py-1"
-                            >
-                              <v-icon> mdi-printer </v-icon>
-                              پرینت تایید شده ها
-                            </v-btn>
-                          </v-col>
-                        </v-container-fluid>
-                      </v-card-text>
-                      <v-card-actions class="justify-end">
-                        <v-btn text="بستن" @click="isActive.value = false"></v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </template>
-                </v-dialog>
+                <v-btn
+                  @click="$router.push($route.fullPath + '/' + item.id)"
+                  class="rounded-lg !text-blue-500"
+                  block
+                  variant="tonal"
+                >
+                  <v-icon> mdi-eye-plus </v-icon></v-btn
+                >
               </div>
               <div>
                 <v-btn @click="handleDeleteItem(item.id)" variant="flat" color="error"
@@ -221,8 +114,7 @@ const createRows = (item) => {
   };
 };
 
-const items = ref([
-]);
+const items = ref([]);
 
 let desserts = [
   {
@@ -339,6 +231,18 @@ const acceptShift = (id) => {
       return;
     }
   });
+};
+const decListItem = ref(null);
+const openDecModal = ref(false);
+
+const handleOpenDecList = async (id) => {
+  decListItem.value = await $fetch(`/api/shifts/declaration/list?id=${id}`);
+  console.log(decListItem.value);
+  openDecModal.value = true;
+};
+const handleCloseDeclist = async (id) => {
+  decListItem.value = null;
+  openDecModal.value = false;
 };
 const rejectShift = (id) => {
   Swal.fire({
