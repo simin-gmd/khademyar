@@ -118,7 +118,7 @@ onMounted(async() => {
   
   const response = await $fetch(`/api/users/user_dashboard?username=${username.value}`);
   const shiftInfo = await $fetch(`/api/users/shift_dashboard`);
-  console.log(shiftInfo , "resresres");
+  //console.log(shiftInfo , "resresres");
 });
 //  data table data
 const selectedValue = ref([]);

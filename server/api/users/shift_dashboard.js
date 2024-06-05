@@ -23,11 +23,11 @@ export default defineEventHandler(async (event) => {
           },
         }
       );
-      console.log(response.data , "simsim");
+      // console.log(response.data , "simsim");
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log( "simsim error", e );
+    // console.log( "simsim error", e );
     return { status: false, data: e };
   }
 });

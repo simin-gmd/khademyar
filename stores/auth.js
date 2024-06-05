@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("auth", {
         async setUserData() {
             const response = await $fetch("/api/auth/info");
             // console.log("setUserData", response);
-            console.log(response , "&&&&" ,this.userData );
+           // console.log(response , "&&&&" ,this.userData );
             this.userData = response.data;
             const indexofProf = response.data.profile
                 .toString()

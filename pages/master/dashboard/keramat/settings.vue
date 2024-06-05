@@ -63,11 +63,11 @@ const numberValidationMessages = ref({ required: "فیلد تعداد الزام
 import axios from 'axios';
 import $swal from 'sweetalert2'
 async function acceptChanges(formData) {
-  console.log(formData);
+  //console.log(formData);
   try {
     loading.value = true;
     const data = await axios.post("/api/shifts/setting", formData);
-    console.log(data.data, "بخقئیشفش");
+   // console.log(data.data, "بخقئیشفش");
     if (data.data.status) {
       $swal.fire("تنظیمات با موفقیت ارسال شد!", "", "success");
     } else {
@@ -76,7 +76,7 @@ async function acceptChanges(formData) {
     }
   } catch (error) {
     $swal.fire("خطا در دریافت اطلاعات!", "", "error");
-    console.log(error);
+    //console.log(error);
   } finally {
     loading.value = false;
   }

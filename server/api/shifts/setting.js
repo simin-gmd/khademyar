@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
   const incomeBody = await readBody(event);
-console.log(incomeBody , "incomeBody");
+//console.log(incomeBody , "incomeBody");
   const {
     public: { API_URL },
   } = useRuntimeConfig();

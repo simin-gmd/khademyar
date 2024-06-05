@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     public: { API_URL },
   } = useRuntimeConfig();
 
-  console.log(incomeBody);
+  //console.log(incomeBody);
 
   // const config = useRuntimeConfig();
   try {
