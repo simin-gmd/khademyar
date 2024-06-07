@@ -21,6 +21,7 @@
         <div class="p-3" v-if="isData">
           <ClientOnly>
             <FullCalendar
+            class="!container p-0  md:p-36"
               ref="fullCalendar"
               shadow
               v-bind="{ options: calendarOptions }"
@@ -55,7 +56,6 @@
   </div>
 </template>
 <script setup>
-import { useEventListener } from "#imports";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from "axios";
@@ -80,30 +80,8 @@ const isData = ref(false);
 const selectedDate = ref(new Date());
 const selectedPermissions = ref([]);
 //static types
-const eventTypes = [
-  { value: 1, label: "المپیاد", color: "#00897B" },
-  { value: 2, label: "جشن ", color: "#6007D8" },
-  { value: 3, label: "مسابقه", color: "#FF6839" },
-  { value: 4, label: "آزمون", color: "#3F51B5" },
-];
-const permissionsList = [
-  { label: "معلم", value: "teacher" },
-  { label: "والدین", value: "parent" },
-  { label: "پشتیبان", value: "adviser" },
-  { label: "مدیر مدرسه", value: "admin" },
-  { label: "مدیران", value: "master" },
-  { label: "دانش آموز", value: "student" },
-  { label: "کادر اداری", value: "partner" },
-];
 
-// validatonbs
-const typesValidationMessages = ref({
-  required: "فیلد انتخاب نوع آزمون الزامیست",
-});
-const years = ref(["1401-1402", "1400-1401"]);
-const yearValidationMessages = ref({
-  required: "فیلد  سال تحصیلی الزامیست",
-});
+
 
 const handleDateClick = function (arg) {
   const date = moment(arg.dateStr).locale("fa").format("YYYY-MM-DD");
