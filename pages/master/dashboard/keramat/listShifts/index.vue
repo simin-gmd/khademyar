@@ -273,6 +273,7 @@ watch(userInfo.data, async () => {
   uuid.value = profile.slice(indexofProf, profile.length).split("/")[1];
 });
 watch(shiftList.data, () => {
+  console.log(shiftList.data , "shifitList");
   if (shiftList.data.value?.data.length) {
     items.value = shiftList.data.value?.data.map((i) => createRows(i));
   }

@@ -16,18 +16,17 @@ export default defineEventHandler(async (event) => {
     if (access.data.access) {
       const response = await axios.get(
         `${API_URL}/api/shifts/dashboard_shifts_info/`,
-        query,
+       
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
           },
         }
       );
-      // console.log(response.data , "simsim");
+    
       return { status: true, data: response.data };
     }
   } catch (e) {
-    // console.log( "simsim error", e );
     return { status: false, data: e };
   }
 });

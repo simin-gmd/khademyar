@@ -218,6 +218,7 @@ function createRows(item) {
 function handleOpenEditModal(item) {
   // store edit value item id
   selectedItem.value = item;
+
   // itemStatus.value = item.status == "فعال" ? true : false;
   openEditModal.value = true;
 }
@@ -241,7 +242,13 @@ async function handleCreate(formData) {
     const data = await axios.post("/api/shifts/capacity/add", formData);
     // console.log(data.data, "بخقئیشفش");
     if (data.data.status) {
-      $swal.fire("تنظیمات با موفقیت ارسال شد!", "", "success");
+
+      $swal.fire("تنظیمات با موفقیت انجام شد!", "", "success");
+      useAsyncData("capacityList", () =>
+            $fetch(
+              `/api/shifts/capacity/list`
+            )
+          );
     } else {
       $swal.fire("خطا در دریافت اطلاعات!", "", "error");
       // errorMsg.value = "لطفا اطلاعات را بظرفیت جدیدتی وارد کنید";
@@ -255,10 +262,9 @@ async function handleCreate(formData) {
 }
 
 async function handleEdit(formData) {
-  //console.log(formData);
   try {
     loading.value = true;
-    const data = await axios.post("/api/shifts/capacity/update", formData);
+    const data = await axios.post("/api/shifts/capacity/update", {...formData,id:selectedItem.value.id});
     // console.log(data.data, "بخقئیشفش");
     if (data.data.status) {
 

@@ -13,18 +13,18 @@ export default defineEventHandler(async (event) => {
     });
     if (access.data.access) {
       const response = await axios.get(
-        `${API_URL}/api/shifts/?${createFilterQuery(query)}`,
+        `${API_URL}/api/shifts/available_shifts/?${createFilterQuery(query)}`,
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
           },
         }
       );
-      // console.log("test", response.data);
+      console.log("test", response.data);
       return { status: true, data: response.data };
     }
   } catch (e) {
-    // console.log(e);
+    console.log(e);
     return { status: false, data: e };
   }
 });

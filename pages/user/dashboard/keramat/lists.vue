@@ -2,9 +2,9 @@
   <PublicPageTitle title="شیفت ها" />
 
   <CardSection>
-    <div>
+    <!-- <div>
       <publicPageTitle title="لیست همه شیفت ها" />
-    </div>
+    </div> -->
 
     <div class="p-4 border rounded-lg">
       <formsDataTable title="" search @change="handleSearchItems">
@@ -189,12 +189,13 @@ const addrValidationMessages = ref({ required: "فیلد آدرس الزامیس
 const numberValidationMessages = ref({ required: "فیلد تعداد الزامیست" });
 
 const headers = [
-  { title: "عنوان شیفت", align: "center", key: "shift" },
-  { title: "ایجاد کننده ", align: "center", key: "created_by" },
+  { title: "نام شیفت", align: "center", key: "shift" },
+  { title: "مناسبت شیفت", align: "center", key: "shift" },
+  // { title: "ایجاد کننده ", align: "center", key: "created_by" },
   { title: "وضعیت درخواست", align: "center", key: "accepted" },
-  { title: "وضعیت شیفت", align: "center", key: "approved" },
+  // { title: "وضعیت شیفت", align: "center", key: "approved" },
   { title: "انتخاب شیفت ", align: "center", key: "select" },
-  { title: "گزینه ها", align: "center", key: "options" },
+  // { title: "گزینه ها", align: "center", key: "options" },
 ];
 const khademLists = useAsyncData("getShiftRequests", () => getInitialData());
 const dataListState = ref([]);

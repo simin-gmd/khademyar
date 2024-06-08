@@ -64,14 +64,14 @@
           >
             <li>
               <a
-                href="#"
+                href="/"
                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >راهنمای سامانه</a
               >
             </li>
             <li>
               <nuxt-link
-                to="/login"
+                to="/contactUs"
                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 آدرس ها و شماره تماس ها
@@ -79,14 +79,14 @@
             </li>
             <li>
               <a
-                href="#"
+                href="#news"
                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >اخبار خادمین افتخاری چایخانه</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/"
                 class="block py-2 px-3 !text-green-900 rounded md:bg-transparent md:text-green-900 md:p-0 md:dark:text-blue-500"
                 aria-current="page"
                 >خانه</a
@@ -177,7 +177,7 @@
     </div>
   </div>
 
-  <div class="bg-gray-400 p-11 mb-16">
+  <div id="news" class="bg-gray-400 p-11 mb-16">
     <h2 class="text-center pb-11 font-bold">رویداد های خادمیاری</h2>
     <v-row>
       <v-col cols="12" md="4">

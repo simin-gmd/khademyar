@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
       refresh: authToken,
     });
     if (access.data.access) {
-      const response = await axios.delete(`${API_URL}}/api/shifts-capacity/${capacityID}/`, {
+      const response = await axios.delete(`${API_URL}/api/shifts-capacity/${capacityID}/`, {
         headers: {
           Authorization: `Bearer ${access.data.access}`,
         },

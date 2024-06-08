@@ -9,11 +9,8 @@
             <div class="mb-4">
               <publicPageTitle title="وضعیت کلی کاربران " />
             </div>
-
             <div class="grid  grid-cols-6 gap-5 justify-between md:justify-start p-5">
-
               <div class=" col-span-12 md:col-span-6 lg:col-span-3">
-
                 <UtilitiesStats variant="error">
                   <template v-slot:icon>
                     <v-icon>mdi-home</v-icon>
@@ -32,49 +29,56 @@
                   <template v-slot:value> 12 </template>
                 </UtilitiesStats>
               </div>
-             
             </div>
-
-           
-
           </CardSection>
           <CardSection>
             <div class="mb-4">
               <publicPageTitle title="وضعیت کلی شیفت ها" />
             </div>
+            <div v-if="dashboardInfo" class="grid  grid-cols-12 gap-5 justify-between md:justify-start p-5">
 
-       
+              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
 
-            <div class="grid  grid-cols-6 gap-5 justify-between md:justify-start p-5">
-
+                <UtilitiesStats variant="error">
+                  <template v-slot:icon>
+                    <v-icon>mdi-home</v-icon>
+                  </template>
+                  <template v-slot:title> تعدادشیفت های موجود</template>
+                  <template v-slot:value>
+                    {{ dashboardInfo.available_shifts }}
+                  </template>
+                </UtilitiesStats>
+              </div>
              
-              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
+              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
 
                 <UtilitiesStats variant="warning">
                   <template v-slot:icon>
                     <v-icon>mdi-home</v-icon>
                   </template>
-                  <template v-slot:title>تعداد شیفت های انجام شده</template>
-                  <template v-slot:value> 20 </template>
+                  <template v-slot:title> تعداد درخواست های در انتظار </template>
+                  <template v-slot:value>
+                    {{ dashboardInfo.pending_shift_requests }}
+                  </template>
                 </UtilitiesStats>
               </div>
-              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
+              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
 
                 <UtilitiesStats variant="success">
                   <template v-slot:icon>
                     <v-icon>mdi-home</v-icon>
                   </template>
-                  <template v-slot:title>تعداد شیفت های موجود</template>
-                  <template v-slot:value> 10 </template>
+                  <template v-slot:title> تعداد شیفت های انجام شده </template>
+                  <template v-slot:value>
+                    {{ dashboardInfo.done_shifts }}
+                  </template>
                 </UtilitiesStats>
               </div>
             </div>
-
-
           </CardSection>
 
-<!-- <FormsPersianDate/> -->
-          
+          <!-- <FormsPersianDate/> -->
+
         </div>
 
 
@@ -114,11 +118,14 @@ watch(setUserData.data, () => {
   // console.log(username.value  ,"ihbgufhdjwskomknbfgvhuji");
 });
 
-onMounted(async() => {
-  
-  const response = await $fetch(`/api/users/user_dashboard?username=${username.value}`);
-  const shiftInfo = await $fetch(`/api/users/shift_dashboard`);
-  //console.log(shiftInfo , "resresres");
+const dashboardInfo = ref(null)
+
+onMounted(async () => {
+
+  const response = await $fetch(`/api/users/user_dashboard`);
+  if (response.status) {
+    dashboardInfo.value = response.data
+  }
 });
 //  data table data
 const selectedValue = ref([]);
