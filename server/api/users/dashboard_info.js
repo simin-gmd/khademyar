@@ -5,7 +5,8 @@ import axios from "axios";
 export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
-  // const query = getQuery(event);
+  const query = getQuery(event);
+  console.log(query , "dadadada");
   const {
     public: { API_URL },
   } = useRuntimeConfig();
@@ -15,18 +16,18 @@ export default defineEventHandler(async (event) => {
     });
     if (access.data.access) {
       const response = await axios.get(
-        `${API_URL}/api/members/users/dashboard_users_info/`,
+        `${API_URL}/api/shifts/dashboard_shifts_info/`,
+       
         {
           headers: {
             Authorization: `Bearer ${access.data.access}`,
           },
         }
       );
-      console.log(response.data , "simsim");
+    
       return { status: true, data: response.data };
     }
   } catch (e) {
-    console.log(e , "simsim error");
     return { status: false, data: e };
   }
 });

@@ -9,24 +9,42 @@
             <div class="mb-4">
               <publicPageTitle title="وضعیت کلی کاربران " />
             </div>
-            <div class="grid  grid-cols-6 gap-5 justify-between md:justify-start p-5">
-              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
+            <div class="grid  grid-cols-12 gap-5 justify-between md:justify-start p-5">
+              <div class="col-span-12 md:col-span-6 lg:col-span-3">
                 <UtilitiesStats variant="error">
                   <template v-slot:icon>
                     <v-icon>mdi-home</v-icon>
                   </template>
                   <template v-slot:title>تعداد کاربران زن</template>
-                  <template v-slot:value> 7 </template>
+                  <template v-slot:value> {{ dashboardUserInfo.users_female }} </template>
                 </UtilitiesStats>
               </div>
-              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
+              <div class="col-span-12 md:col-span-6 lg:col-span-3">
 
                 <UtilitiesStats variant="primary">
                   <template v-slot:icon>
                     <v-icon>mdi-home</v-icon>
                   </template>
                   <template v-slot:title>تعداد کاربران مرد</template>
-                  <template v-slot:value> 12 </template>
+                  <template v-slot:value> {{ dashboardUserInfo.users_male }} </template>
+                </UtilitiesStats>
+              </div>
+              <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                <UtilitiesStats variant="warning">
+                  <template v-slot:icon>
+                    <v-icon>mdi-home</v-icon>
+                  </template>
+                  <template v-slot:title>تعداد کاربران غیر فعال</template>
+                  <template v-slot:value> {{ dashboardUserInfo.users_active }} </template>
+                </UtilitiesStats>
+              </div>
+              <div class="col-span-12 md:col-span-6 lg:col-span-3">
+                <UtilitiesStats variant="success">
+                  <template v-slot:icon>
+                    <v-icon>mdi-home</v-icon>
+                  </template>
+                  <template v-slot:title>تعداد کاربران فعال</template>
+                  <template v-slot:value> {{ dashboardUserInfo.users_active }} </template>
                 </UtilitiesStats>
               </div>
             </div>
@@ -37,7 +55,7 @@
             </div>
             <div v-if="dashboardInfo" class="grid  grid-cols-12 gap-5 justify-between md:justify-start p-5">
 
-              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
+              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
 
                 <UtilitiesStats variant="error">
                   <template v-slot:icon>
@@ -50,7 +68,7 @@
                 </UtilitiesStats>
               </div>
              
-              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
+              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
 
                 <UtilitiesStats variant="warning">
                   <template v-slot:icon>
@@ -62,7 +80,7 @@
                   </template>
                 </UtilitiesStats>
               </div>
-              <div class=" col-span-12 md:col-span-6 lg:col-span-4">
+              <div class=" col-span-12 md:col-span-6 lg:col-span-3">
 
                 <UtilitiesStats variant="success">
                   <template v-slot:icon>
@@ -119,12 +137,19 @@ watch(setUserData.data, () => {
 });
 
 const dashboardInfo = ref(null)
-
+const dashboardUserInfo = ref(null)
 onMounted(async () => {
 
-  const response = await $fetch(`/api/users/user_dashboard`);
+  const response = await $fetch(`/api/users/shift_dashboard`);
   if (response.status) {
     dashboardInfo.value = response.data
+    console.log(dashboardInfo.value , "dashboardInfo");
+  }
+
+  const res = await $fetch(`/api/users/user_dashboard`);
+  if (res.status) {
+    dashboardUserInfo.value = res.data
+    console.log(dashboardUserInfo , "dashboardUserInfo");
   }
 });
 //  data table data
