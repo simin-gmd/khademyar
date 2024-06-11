@@ -9,7 +9,7 @@
             <div class="mb-4">
               <publicPageTitle title="وضعیت کلی کاربران " />
             </div>
-            <div class="grid  grid-cols-12 gap-5 justify-between md:justify-start p-5">
+            <div v-if="dashboardUserInfo" class="grid  grid-cols-12 gap-5 justify-between md:justify-start p-5">
               <div class="col-span-12 md:col-span-6 lg:col-span-3">
                 <UtilitiesStats variant="error">
                   <template v-slot:icon>

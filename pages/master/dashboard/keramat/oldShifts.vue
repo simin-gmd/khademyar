@@ -6,7 +6,7 @@
     <formsDataTable :search="studentSearch" @change="handleSearchItems">
       <template #table>
 
-        <v-data-table no-data-text="لطفا کمی صبر کنید..." :search="studentSearch" :items="items" :headers="headers">
+        <v-data-table no-data-text="هم اکنون داده ای وجود ندارد" :search="studentSearch" :items="items" :headers="headers">
           <!-- data tabel headers -->
           <template v-slot:item.stock="{ item }">
             <div class="text-center">

@@ -9,25 +9,14 @@
     <div class="p-4 border rounded-lg">
       <formsDataTable title="" search @change="handleSearchItems">
         <template #table>
-          <v-data-table
-            fixed-header
-            no-data-text="داده ای موجود نیست"
-            :search="studentSearch"
-            :items="dataListState"
-            :headers="headers"
-          >
+          <v-data-table fixed-header no-data-text="داده ای موجود نیست" :search="studentSearch" :items="khademLists.data"
+            :headers="headers">
             <!-- data tabel headers -->
 
             <template v-slot:item.accepted="{ item }">
               <div class="text-center">
-                <v-chip
-                  :color="
-                    item.accepted == null ? 'yellow' : item.accepted ? 'green' : 'red'
-                  "
-                  class="text-uppercase"
-                  label
-                  size="small"
-                >
+                <v-chip :color="item.accepted == null ? 'yellow' : item.accepted ? 'green' : 'red'
+                  " class="text-uppercase" label size="small">
                   <span v-if="item.accepted == true">قبول شده </span>
                   <span v-else-if="item.accepted == false">رد شده</span>
                   <span v-else>در حال انتظار</span>
@@ -36,24 +25,17 @@
             </template>
             <template v-slot:item.approved="{ item }">
               <div class="text-center">
-                <v-chip
-                  :color="
-                    item.approved
-                      ? 'green'
-                      : item.approved == null
-                      ? item.accepted
-                        ? 'yellow'
-                        : 'red'
+                <v-chip :color="item.approved
+                  ? 'green'
+                  : item.approved == null
+                    ? item.accepted
+                      ? 'yellow'
                       : 'red'
-                  "
-                  class="text-uppercase"
-                  label
-                  size="small"
-                >
+                    : 'red'
+                  " class="text-uppercase" label size="small">
                   <span v-if="item.approved">تایید شده </span>
                   <span v-else-if="item.approved == false">تایید نشده</span>
-                  <span v-else
-                    ><span v-if="item.accepted"> در حال انتظار</span>
+                  <span v-else><span v-if="item.accepted"> در حال انتظار</span>
                     <span v-else> رد شده توسط کاربر </span>
                   </span>
                 </v-chip>
@@ -64,20 +46,10 @@
               <div class="text-center">
                 <v-chip class="text-uppercase" label size="">
                   <div class="d-flex gap-x-2">
-                    <v-btn
-                      size="small"
-                      :disabled="item.accepted == null ? false : true"
-                      class="bg-green"
-                      @click="acceptShift(item)"
-                      >قبول</v-btn
-                    >
-                    <v-btn
-                      size="small"
-                      :disabled="item.accepted == null ? false : true"
-                      class="bg-red"
-                      @click="rejectShift(item)"
-                      >رد</v-btn
-                    >
+                    <v-btn size="small" :disabled="item.accepted == null ? false : true" class="bg-green"
+                      @click="acceptShift(item)">قبول</v-btn>
+                    <v-btn size="small" :disabled="item.accepted == null ? false : true" class="bg-red"
+                      @click="rejectShift(item)">رد</v-btn>
                   </div>
                 </v-chip>
               </div>
@@ -85,14 +57,8 @@
 
             <template v-slot:item.options="{ item }">
               <div class="flex items-center text-center gap-x-2">
-                <v-btn
-                  variant="tonal"
-                  size="small"
-                  :disabled="item.approved && item.accepted ? true : false"
-                  color="red"
-                  @click="handleDelete(item)"
-                  :text="'حذف'"
-                >
+                <v-btn variant="tonal" size="small" :disabled="item.approved && item.accepted ? true : false"
+                  color="red" @click="handleDelete(item)" :text="'حذف'">
                 </v-btn>
               </div>
             </template>
@@ -114,30 +80,19 @@
         <v-card-title>
           <div class="flex justify-between items-center">
             <span><v-icon>mdi-home-outline</v-icon> افزودن شیفت </span>
-            <v-btn variant="text" rounded @click="handleOpenAddDesc(null)"
-              ><v-icon color="black" size="large">mdi-close</v-icon></v-btn
-            >
+            <v-btn variant="text" rounded @click="handleOpenAddDesc(null)"><v-icon color="black"
+                size="large">mdi-close</v-icon></v-btn>
           </div>
         </v-card-title>
         <v-card-text>
           <div elevation="0" title="ورود اطلاعات" flat class="">
-            <FormKit
-              type="form"
-              id="handleAddDesc"
-              @submit="handleAddDesc"
-              :incomplete-message="false"
-              :actions="false"
-            >
+            <FormKit type="form" id="handleAddDesc" @submit="handleAddDesc" :incomplete-message="false"
+              :actions="false">
               <v-container class="!border !border-gray-100 !rounded-xl">
                 <v-row class="items-center justify-center">
                   <v-col cols="12">
-                    <FormKit
-                      type="textarea"
-                      name="user_description"
-                      v-model="selectedItem.user_description"
-                      label="توضیحات"
-                      placeholder=""
-                    />
+                    <FormKit type="textarea" name="user_description" v-model="selectedItem.user_description"
+                      label="توضیحات" placeholder="" />
                   </v-col>
                 </v-row>
                 <v-row class="justify-end">
@@ -175,29 +130,20 @@ const handleOpenAddDesc = async (item) => {
   }
   discriptionModal.value = !discriptionModal.value;
 };
-const jensiat = ref(["مرد", "زن "]);
-const jensiatValidationMessages = ref({
-  required: "فیلد انتخاب جنسیت الزامیست",
-});
-
-const branchs = ref(["سجاد", "هنرستان", "هفت تیر", "خیام"]);
-const branchsValidationMessages = ref({
-  required: "فیلد انتخاب شعبه الزامیست",
-});
-const nameValidationMessages = ref({ required: "فیلد عنوان الزامیست" });
-const addrValidationMessages = ref({ required: "فیلد آدرس الزامیست" });
-const numberValidationMessages = ref({ required: "فیلد تعداد الزامیست" });
 
 const headers = [
   { title: "نام شیفت", align: "center", key: "shift" },
-  { title: "مناسبت شیفت", align: "center", key: "shift" },
+  { title: "مناسبت شیفت", align: "center", key: "occasion" },
   // { title: "ایجاد کننده ", align: "center", key: "created_by" },
   { title: "وضعیت درخواست", align: "center", key: "accepted" },
   // { title: "وضعیت شیفت", align: "center", key: "approved" },
   { title: "انتخاب شیفت ", align: "center", key: "select" },
   // { title: "گزینه ها", align: "center", key: "options" },
 ];
-const khademLists = useAsyncData("getShiftRequests", () => getInitialData());
+const khademLists = useState("getShiftsLit", () => ({
+  status: false,
+  data: []
+}));
 const dataListState = ref([]);
 const isData = computed(() => (dataListState.value.length > 0 ? true : false));
 
@@ -211,40 +157,6 @@ const studentSearch = useState("search", () => "");
 const handleSearchItems = (value) => {
   studentSearch.value = value;
 };
-//params for descriptions
-const descriptions = ref([
-  {
-    text: "قوانین1",
-    id: 1,
-  },
-  {
-    text: "قوانین2",
-
-    id: 2,
-  },
-  {
-    text: "قوانین3",
-
-    id: 3,
-  },
-  {
-    text: "قوانین4",
-
-    id: 4,
-  },
-  {
-    text: "قوانین5",
-
-    id: 5,
-  },
-
-  {
-    text: "قوانین6",
-
-    id: 6,
-  },
-]);
-
 import axios from "axios";
 // onMounted()
 import Swal from "sweetalert2";
@@ -262,8 +174,7 @@ const acceptShift = async (item) => {
         accepted: true,
       });
       if (response.data.status) {
-        const data = await getInitialData();
-        dataListState.value = data.data;
+        khademLists.value = await getInitialData();
         Swal.fire("شیفت مورد نظر قبول شد.", "", "success");
       } else {
         Swal.fire("مشکلی پیش آمده است.", "", "error");
@@ -284,8 +195,7 @@ const rejectShift = async (item) => {
         accepted: false,
       });
       if (response.data.status) {
-        const data = await getInitialData();
-        dataListState.value = data.data;
+        khademLists.value = await getInitialData();
         Swal.fire("شیفت مورد نظر رد شد.", "", "success");
       } else {
         Swal.fire("مشکلی پیش آمده است.", "", "error");
@@ -305,8 +215,8 @@ const handleDelete = (item) => {
         `/api/shifts/requests/single/delete?id=${item.id}`
       );
       if (response.data.status) {
-        const data = await getInitialData();
-        dataListState.value = data.data;
+        khademLists.value = await getInitialData();
+
         Swal.fire("شیفت مورد نظر حذف شد.", "", "success");
       } else {
         Swal.fire("مشکلی پیش آمده است.", "", "error");
@@ -321,8 +231,8 @@ const handleAddDesc = async (formData) => {
     ...selectedItem.value,
   });
   if (response.data.status) {
-    const data = await getInitialData();
-    dataListState.value = data.data;
+    khademLists.value = await getInitialData();
+
     handleOpenAddDesc(null);
     reset("handleAddDesc");
     Swal.fire("توضیحات ارسال شد.", "", "success");
@@ -332,13 +242,12 @@ const handleAddDesc = async (formData) => {
 };
 
 onUpdated(async () => {
-  useAsyncData("getShiftRequests", () => getInitialData());
+  khademLists.value = await getInitialData();
+
 });
-onMounted(() => {
-  useAsyncData("getShiftRequests", () => getInitialData());
+onMounted(async () => {
+  khademLists.value = await getInitialData();
 });
 //  load inital data table
-watch(khademLists.data, async () => {
-  dataListState.value = khademLists.data.value.data;
-});
+
 </script>
