@@ -12,7 +12,6 @@
           <v-data-table fixed-header no-data-text="داده ای موجود نیست" :search="studentSearch" :items="khademLists.data"
             :headers="headers">
             <!-- data tabel headers -->
-
             <template v-slot:item.accepted="{ item }">
               <div class="text-center">
                 <v-chip :color="item.accepted == null ? 'yellow' : item.accepted ? 'green' : 'red'
@@ -46,9 +45,9 @@
               <div class="text-center">
                 <v-chip class="text-uppercase" label size="">
                   <div class="d-flex gap-x-2">
-                    <v-btn size="small" :disabled="item.accepted == null ? false : true" class="bg-green"
+                    <v-btn size="small" :disabled="item.accepted == (null || false) ? false : true" class="bg-green"
                       @click="acceptShift(item)">قبول</v-btn>
-                    <v-btn size="small" :disabled="item.accepted == null ? false : true" class="bg-red"
+                    <v-btn size="small" :disabled="item.accepted == (null ||true) ? false : true" class="bg-red"
                       @click="rejectShift(item)">رد</v-btn>
                   </div>
                 </v-chip>
@@ -133,8 +132,8 @@ const handleOpenAddDesc = async (item) => {
 
 const headers = [
   { title: "نام شیفت", align: "center", key: "shift" },
-  { title: "مناسبت شیفت", align: "center", key: "occasion" },
-  // { title: "ایجاد کننده ", align: "center", key: "created_by" },
+  { title: "مناسبت شیفت", align: "center", key: "shift" },
+  // { title: "تاریخ شیفت", align: "center", key: "time" },
   { title: "وضعیت درخواست", align: "center", key: "accepted" },
   // { title: "وضعیت شیفت", align: "center", key: "approved" },
   { title: "انتخاب شیفت ", align: "center", key: "select" },

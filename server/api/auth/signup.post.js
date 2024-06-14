@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     // console.log(response.data);
     return { status: true, data: response.data };
   } catch (err) {
-    // console.log(err);
+    console.log(err.response);
 
     return { status: false, data: err };
   }

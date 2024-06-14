@@ -93,11 +93,13 @@
                                   type="password"
                                   name="password"
                                   id="password"
-                                  value="super-secret"
+                                 
                                   label="رمز عبور"
-                                  validation="required"
+                                  validation="required|?length:8|contains_symbol"
                                   :validation-messages="{
                                     required: 'فیلد رمز عبور الزامیست',
+                                    length :'تعداد کارکتر باید بیشتر از 8 حرف باشد',
+                                    contains_symbol : 'رمز عبور حتما باید دارای یک  سمبل($ یا % یا # یا @ یا ...) باشد'
                                   }"
                                 />
                               </v-col>
@@ -193,9 +195,12 @@ async function register(formData) {
       $swal.fire("اطلاعات با موفقیت ارسال شد!", "", "success");
       router.replace("/login");
     } else {
-      errorMsg.value = "لطفا اطلاعات را بدرستی وارد کنید";
-    }
-  } catch (error) {
+      errorMsg.value = "لطفا از تکراری نبودن شماره موبایل یا نام کاربری و یا کد ملی اطمینان حاصل نمایید.";
+      setTimeout(() => {
+      errorMsg.value = " ";
+      }, 5000);
+      }
+      } catch (error) {
     $swal.fire("خطا در دریافت اطلاعات!", "", "error");
     // console.log(error);
   } finally {

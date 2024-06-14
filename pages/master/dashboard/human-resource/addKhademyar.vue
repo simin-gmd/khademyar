@@ -41,8 +41,10 @@
                 <v-col cols="12" md="4">
                   <FormKit label-class="form-label" input-class="form-control" messages-class="form-text text-red"
                     type="password" name="password" id="password" value="super-secret" label="رمز عبور"
-                    validation="required" :validation-messages="{
+                    validation="required|?length:8|contains_symbol" :validation-messages="{
                       required: 'فیلد رمز عبور الزامیست',
+                      length: 'تعداد کارکتر باید بیشتر از 8 حرف باشد',
+                      contains_symbol: 'رمز عبور حتما باید دارای یک  سمبل($ یا % یا # یا @ یا ...) باشد'
                     }" />
                 </v-col>
                 <v-col cols="12" md="4">
@@ -59,9 +61,9 @@
                       ['required'],
                       ['matches', /^(\+98|0)?9\d{9}$/],
                     ]" :validation-messages="{
-                                required: 'فیلد شماره تماس الزامیست',
-                                matches: 'فیلد شماره تماس معتبر نمیباشد',
-                              }" placeholder="" validation-visibility="dirty" id="mobile" name="mobile"
+                      required: 'فیلد شماره تماس الزامیست',
+                      matches: 'فیلد شماره تماس معتبر نمیباشد',
+                    }" placeholder="" validation-visibility="dirty" id="mobile" name="mobile"
                     label="تلفن " />
                 </v-col>
               </v-row>
@@ -71,19 +73,19 @@
                   <!-- <template #append>
                               <v-icon>mdi-plus</v-icon>
                             </template> -->
-                <v-progress-circular v-if="loading" :white="3" color="secondary" indeterminate></v-progress-circular>
+                  <v-progress-circular v-if="loading" :white="3" color="secondary" indeterminate></v-progress-circular>
 
                 </FormsButton>
-              <!-- <span class="text-red-500">{{ errorMsg }}</span> -->
+                <!-- <span class="text-red-500">{{ errorMsg }}</span> -->
 
               </v-row>
               <!-- <button class="submit-btn" type="submit">
                 <v-progress-circular v-if="loading" :white="3" color="secondary" indeterminate></v-progress-circular>
                 ثبت نام
               </button> -->
-              <v-row>  
+              <v-row>
                 <span class="text-red-500 justify-center py-5 mx-auto">{{ errorMsg }}</span>
-              </v-row>  
+              </v-row>
             </FormKit>
           </div>
 
@@ -97,7 +99,7 @@
 <script setup>
 import axios from "axios";
 import { reset } from "@formkit/core";
-const {$swal} = useNuxtApp()
+const { $swal } = useNuxtApp()
 const loading = ref(false);
 const errorMsg = ref("");
 const router = useRouter()
@@ -110,10 +112,13 @@ async function register(formData) {
     // console.log(data.data);
     if (data.data.status) {
       reset("register");
-      $swal.fire("اطلاعات با موفقیت ارسال شد!","", "success");
+      $swal.fire("اطلاعات با موفقیت ارسال شد!", "", "success");
       router.replace("/login");
     } else {
-      errorMsg.value = "لطفا اطلاعات را بدرستی وارد کنید";
+      errorMsg.value = "لطفا از تکراری نبودن شماره موبایل یا نام کاربری و یا کد ملی اطمینان حاصل نمایید.";
+      setTimeout(() => {
+        errorMsg.value = " ";
+      }, 5000);
     }
   } catch (error) {
     $swal.fire("خطا در دریافت اطلاعات!", "", "error");
