@@ -9,13 +9,24 @@
     <div class="p-4 border rounded-lg">
       <formsDataTable title="" search @change="handleSearchItems">
         <template #table>
-          <v-data-table fixed-header no-data-text="داده ای موجود نیست" :search="studentSearch" :items="khademLists.data"
-            :headers="headers">
+          <v-data-table
+            fixed-header
+            no-data-text="داده ای موجود نیست"
+            :search="studentSearch"
+            :items="khademLists.data"
+            :headers="headers"
+          >
             <!-- data tabel headers -->
             <template v-slot:item.accepted="{ item }">
               <div class="text-center">
-                <v-chip :color="item.accepted == null ? 'yellow' : item.accepted ? 'green' : 'red'
-                  " class="text-uppercase" label size="small">
+                <v-chip
+                  :color="
+                    item.accepted == null ? 'yellow' : item.accepted ? 'green' : 'red'
+                  "
+                  class="text-uppercase"
+                  label
+                  size="small"
+                >
                   <span v-if="item.accepted == true">قبول شده </span>
                   <span v-else-if="item.accepted == false">رد شده</span>
                   <span v-else>در حال انتظار</span>
@@ -24,17 +35,24 @@
             </template>
             <template v-slot:item.approved="{ item }">
               <div class="text-center">
-                <v-chip :color="item.approved
-                  ? 'green'
-                  : item.approved == null
-                    ? item.accepted
-                      ? 'yellow'
+                <v-chip
+                  :color="
+                    item.approved
+                      ? 'green'
+                      : item.approved == null
+                      ? item.accepted
+                        ? 'yellow'
+                        : 'red'
                       : 'red'
-                    : 'red'
-                  " class="text-uppercase" label size="small">
+                  "
+                  class="text-uppercase"
+                  label
+                  size="small"
+                >
                   <span v-if="item.approved">تایید شده </span>
                   <span v-else-if="item.approved == false">تایید نشده</span>
-                  <span v-else><span v-if="item.accepted"> در حال انتظار</span>
+                  <span v-else
+                    ><span v-if="item.accepted"> در حال انتظار</span>
                     <span v-else> رد شده توسط کاربر </span>
                   </span>
                 </v-chip>
@@ -45,10 +63,28 @@
               <div class="text-center">
                 <v-chip class="text-uppercase" label size="">
                   <div class="d-flex gap-x-2">
-                    <v-btn size="small" :disabled="item.accepted == (null || false) ? false : true" class="bg-green"
-                      @click="acceptShift(item)">قبول</v-btn>
-                    <v-btn size="small" :disabled="item.accepted == (null ||true) ? false : true" class="bg-red"
-                      @click="rejectShift(item)">رد</v-btn>
+                    <v-btn
+                      size="small"
+                      :disabled="item.accepted == (null || false) ? false : true"
+                      class="bg-green"
+                      @click="acceptShift(item)"
+                      >قبول</v-btn
+                    >
+                    <v-btn
+                      size="small"
+                      :disabled="item.accepted == (null || true) ? false : true"
+                      class="bg-red"
+                      @click="rejectShift(item)"
+                      >رد</v-btn
+                    >
+                    <v-btn
+                      variant="tonal"
+                      size="small"
+                      @click="handleOpenAddDesc(item)"
+                      color="blue"
+                      :text="'توضیحات'"
+                    >
+                    </v-btn>
                   </div>
                 </v-chip>
               </div>
@@ -56,8 +92,14 @@
 
             <template v-slot:item.options="{ item }">
               <div class="flex items-center text-center gap-x-2">
-                <v-btn variant="tonal" size="small" :disabled="item.approved && item.accepted ? true : false"
-                  color="red" @click="handleDelete(item)" :text="'حذف'">
+                <v-btn
+                  variant="tonal"
+                  size="small"
+                  :disabled="item.approved && item.accepted ? true : false"
+                  color="red"
+                  @click="handleDelete(item)"
+                  :text="'حذف'"
+                >
                 </v-btn>
               </div>
             </template>
@@ -79,19 +121,98 @@
         <v-card-title>
           <div class="flex justify-between items-center">
             <span><v-icon>mdi-home-outline</v-icon> افزودن شیفت </span>
-            <v-btn variant="text" rounded @click="handleOpenAddDesc(null)"><v-icon color="black"
-                size="large">mdi-close</v-icon></v-btn>
+            <v-btn variant="text" rounded @click="handleOpenAddDesc(null)"
+              ><v-icon color="black" size="large">mdi-close</v-icon></v-btn
+            >
           </div>
         </v-card-title>
         <v-card-text>
           <div elevation="0" title="ورود اطلاعات" flat class="">
-            <FormKit type="form" id="handleAddDesc" @submit="handleAddDesc" :incomplete-message="false"
-              :actions="false">
+            <FormKit
+              type="form"
+              id="handleAddDesc"
+              @submit="handleAddDesc"
+              :incomplete-message="false"
+              :actions="false"
+            >
               <v-container class="!border !border-gray-100 !rounded-xl">
                 <v-row class="items-center justify-center">
                   <v-col cols="12">
-                    <FormKit type="textarea" name="user_description" v-model="selectedItem.user_description"
-                      label="توضیحات" placeholder="" />
+                    <FormKit
+                      type="textarea"
+                      name="user_description"
+                      v-model="selectedItem.user_description"
+                      label="توضیحات کاربر"
+                      placeholder=""
+                    />
+                  </v-col>
+                  <v-col cols="12">
+                    <FormKit
+                      type="textarea"
+                      :disabled="true"
+                      name="admin_description"
+                      v-model="selectedItem.user_description"
+                      label="توضیحات مدیر"
+                      placeholder=""
+                    />
+                  </v-col>
+                </v-row>
+                <v-row class="justify-end">
+                  <FormsButton type="submit" variant="primary" title="ذخیره">
+                    <!-- <template #append>
+                              <v-icon>mdi-plus</v-icon>
+                            </template> -->
+                  </FormsButton>
+                </v-row>
+              </v-container>
+            </FormKit>
+          </div>
+        </v-card-text>
+
+        <v-divider></v-divider>
+      </v-card>
+    </v-dialog>
+  </div>
+  <div v-if="selectedItem">
+    <v-dialog v-model="discriptionModal" maxWidth="450">
+      <v-card>
+        <v-card-title>
+          <div class="flex justify-between items-center">
+            <span><v-icon>mdi-home-outline</v-icon> توضیحات شیفت </span>
+            <v-btn variant="text" rounded @click="handleOpenDesc(null)"
+              ><v-icon color="black" size="large">mdi-close</v-icon></v-btn
+            >
+          </div>
+        </v-card-title>
+        <v-card-text>
+          <div elevation="0" title="ورود اطلاعات" flat class="">
+            <FormKit
+              id="handleAddDesc"
+              type="form"
+              @submit="handleAddDesc"
+              :incomplete-message="false"
+              :actions="false"
+            >
+              <v-container class="!border !border-gray-100 !rounded-xl">
+                <v-row class="items-center justify-center">
+                  <v-col cols="12">
+                    <FormKit
+                      type="textarea"
+                      name="user_description"
+                      v-model="userServiceDecriptions.admin_description"
+                      label="توضیحات مدیر"
+                      placeholder=""
+                    />
+                  </v-col>
+                  <v-col cols="12">
+                    <FormKit
+                      type="textarea"
+                      name="user_description"
+                      disabled="true"
+                      v-model="userServiceDecriptions.user_description"
+                      label="توضیحات کاربر"
+                      placeholder=""
+                    />
                   </v-col>
                 </v-row>
                 <v-row class="justify-end">
@@ -126,6 +247,8 @@ const handleOpenAddDesc = async (item) => {
   if (item) {
     const res = await axios.get(`/api/shifts/requests/single?id=${item.id}`);
     selectedItem.value = res.data.data;
+  console.log(selectedItem.value,item)
+
   }
   discriptionModal.value = !discriptionModal.value;
 };
@@ -141,7 +264,7 @@ const headers = [
 ];
 const khademLists = useState("getShiftsLit", () => ({
   status: false,
-  data: []
+  data: [],
 }));
 const dataListState = ref([]);
 const isData = computed(() => (dataListState.value.length > 0 ? true : false));
@@ -227,7 +350,7 @@ const handleDelete = (item) => {
 const handleAddDesc = async (formData) => {
   const response = await axios.post("/api/shifts/requests/description", {
     ...formData,
-    ...selectedItem.value,
+    shift: selectedItem.value.id,
   });
   if (response.data.status) {
     khademLists.value = await getInitialData();
@@ -242,11 +365,9 @@ const handleAddDesc = async (formData) => {
 
 onUpdated(async () => {
   khademLists.value = await getInitialData();
-
 });
 onMounted(async () => {
   khademLists.value = await getInitialData();
 });
 //  load inital data table
-
 </script>

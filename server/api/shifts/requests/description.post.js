@@ -4,7 +4,6 @@ export default defineEventHandler(async (event) => {
   //read payload form body
   const authToken = getCookie(event, "refreshToken");
   const bodyData = await readBody(event);
-  const { user_description, id } = bodyData;
   // console.log(bodyData);
   const {
     public: { API_URL },
